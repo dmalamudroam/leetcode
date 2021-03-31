@@ -1,7 +1,4 @@
-/**
- * @param {string} s
- * @return {string}
- */
+// Initial Solution
 var isPalindrome = function(s) {
   if (s.length <= 1) {
       return true;
@@ -41,3 +38,35 @@ var longestPalindrome = function(s) {
       nextGen = [];
   }
 };
+
+// Expand from center
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+
+  let start = 0;
+  let end = 0;
+
+  for (let i = 0; i < s.length; i++) {
+      let length1 = expand(s, i, i);
+      let length2 = expand(s, i, i + 1);
+      let length = Math.max(length1, length2);
+      if (length > end - start) {
+          start = i - Math.floor((length - 1) / 2);
+          end = i + Math.floor(length / 2);
+      }
+
+  }
+  return s.substring(start, end + 1);
+};
+
+var expand = function(s, left, right) {
+ while(left >= 0 && right < s.length && s[left] === s[right]) {
+     left--;
+     right++;
+ }
+
+  return right - left - 1;
+}
