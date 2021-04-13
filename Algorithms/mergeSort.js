@@ -1,29 +1,30 @@
 const merge = (arr1, arr2) => {
   let result = [];
+  let i = 0;
+  let j = 0;
 
-  while (arr1[0] !== undefined || arr2[0] !== undefined) {
-    let val1 = arr1[0];
-    let val2 = arr2[0];
-
-    if (val1 === undefined) {
-      result = result.concat(arr2.splice(0));
-      break;
-    }
-
-    if (val2 === undefined) {
-      result = result.concat(arr1.splice(0));
-      break;
-    }
+  while (i < arr1.length && j < arr2.length) {
+    let val1 = arr1[i];
+    let val2 = arr2[j];
 
     if (val1 > val2) {
-      let shiftedVal  = arr2.shift();
-      result.push(shiftedVal);
+      result.push(val2);
+      j++;
     } else {
-      let shiftedVal  = arr1.shift();
-      result.push(shiftedVal);
+      result.push(val1);
+      i++;
     }
   }
 
+  while(i < arr1.length) {
+    result.push(arr1[i]);
+    i++;
+  }
+
+  while(j < arr2.length) {
+    result.push(arr2[j]);
+    j++;
+  }
   return result;
 }
 
@@ -31,6 +32,4 @@ let testArr1 = [0,0,1,2,3,4,8,9];
 let testArr2 = [-4,-3,0,3,3,5,6];
 
 let mergedArray = merge(testArr1, testArr2);
-console.log(testArr1);
-console.log(testArr2);
 console.log(mergedArray);
