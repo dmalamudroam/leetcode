@@ -28,8 +28,20 @@ const merge = (arr1, arr2) => {
   return result;
 }
 
-let testArr1 = [0,0,1,2,3,4,8,9];
-let testArr2 = [-4,-3,0,3,3,5,6];
+const mergeSort = (array) => {
 
-let mergedArray = merge(testArr1, testArr2);
-console.log(mergedArray);
+  if (array.length <= 1) {
+    return array;
+  }
+
+  let mid = Math.floor(array.length / 2);
+  let left = array.slice(0, mid);
+  let right = array.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+let testArr = [-4,-3,0,3,3,5,6,0,0,1,2,3,4,8,9];
+console.log(testArr);
+let sortedArr = mergeSort(testArr);
+console.log(sortedArr);
