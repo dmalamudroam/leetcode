@@ -1,3 +1,4 @@
+// Recursive Approach
 var reverseList = function(head, revHead = null) {
   if (head === null) {
       return null;
@@ -13,4 +14,19 @@ var reverseList = function(head, revHead = null) {
   head.next = revHead;
 
   return reverseList(newHead, reverseHead);
+};
+
+//Iterative Approach
+var reverseList = function(head) {
+  let prev = null;
+  let curr = head;
+
+  while (curr) {
+      let next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+  }
+
+  return prev;
 };
