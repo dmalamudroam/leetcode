@@ -59,3 +59,37 @@ class maxBinaryHeap {
     return max;
   }
 }
+
+// Priority Queue
+
+
+class Node {
+  constructor(val, priority){
+    this.val = val;
+    this.priority = priority;
+  }
+}
+
+class PriorityQueue{
+  constructor () {
+    this.values = [];
+  }
+
+  bubbleUp (node) {
+    let index = this.values.length - 1;
+    let parentIdx = Math.floor((index - 1) / 2);
+
+    while (this.values[parentIdx] && node.priority < this.values[parentIdx].priority) {
+      this.values[index] = this.values[parentIdx];
+      this.values[parentIdx] = node;
+      index = parentIdx;
+      parentIdx = Math.floor((index - 1) / 2);
+    }
+  }
+
+  insert (node) {
+    this.values.push(node);
+    this.bubbleUp(node);
+    return this.values;
+  }
+}
